@@ -1,0 +1,67 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - transform_influxdb
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: query_influxdb
+  retry_config: null
+  status: executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: query_influxdb
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - write_influxdb
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: transform_influxdb
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - query_influxdb
+  uuid: transform_influxdb
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: write_influxdb
+  retry_config: null
+  status: failed
+  type: data_exporter
+  upstream_blocks:
+  - transform_influxdb
+  uuid: write_influxdb
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2023-09-28 18:25:18.561791+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: broken fog
+notification_config: {}
+retry_config: {}
+run_pipeline_in_one_process: false
+spark_config: {}
+tags: []
+type: python
+updated_at: '2023-09-28 19:10:38'
+uuid: broken_fog
+widgets: []

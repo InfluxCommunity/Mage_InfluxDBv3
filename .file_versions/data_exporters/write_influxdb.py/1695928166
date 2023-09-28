@@ -1,0 +1,29 @@
+import pandas as pd
+from influxdb_client_3 import InfluxDBClient3
+
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+
+@data_exporter
+def export_data(data, *args, **kwargs):
+    """
+    Exports data to some source.
+
+    Args:
+        data: The output from the upstream parent block
+        args: The output from any additional upstream blocks (if applicable)
+
+    Output (optional):
+        Optionally return any object and it'll be logged and
+        displayed when inspecting the block run.
+    """
+    client = InfluxDBClient3(token="nT-C_ueIrhO9lbYVTC-s5zuwdFxmnhWkFcLIG6wPQHSgAehLQuj4Tw-auw5IwfW1E4z5UM9dpUkhpRifbqGf0A==",
+                        host="us-east-1-1.aws.cloud2.influxdata.com",
+                        org="89711f17730122e0",
+                        database="demo")
+
+    client.write(data, data_frame_measurement_name='cpu_avg',
+             data_frame_tag_columns=['cpu'])
+
+
